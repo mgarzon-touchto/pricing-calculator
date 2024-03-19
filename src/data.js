@@ -6,7 +6,7 @@ export const OWN_THE_MARKET = 3; // $ PER POOL LOCATION SERVICED
 export const HOURS_SAVED_WITH_SKIMMER = 5;
 export const NUMBER_OF_POOLS_CLEANED_PER_HOUR = 2
 
-export const CONTACT_US_URL = "https://getskimmer.com"
+export const CONTACT_US_URL = "https://skimmer-inc.webflow.io/utility/contact-us"
 
 // FORMULAS
 export const getIncrementalPoolsAddedBecauseOfTimeSavings = (numberOfTechs) => {
