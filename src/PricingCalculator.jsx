@@ -39,7 +39,7 @@ const PricingCalculator = () => {
   };
 
   return (
-    <div className="w-full min-h-screen overflow-y-auto p-6 gap-4 md:p-10 md:gap-8 lg:p-28 lg:gap-16 flex flex-col justify-center items-center bg-skimmer-light-100">
+    <div className="w-full min-h-screen overflow-y-auto p-4 gap-4 md:p-10 md:gap-8 lg:p-28 lg:gap-16 flex flex-col justify-center items-center bg-skimmer-light-100">
       {/* Heading */}
       <h1 className="text-4xl text-skimmer-text-dark font-display font-bold text-center">
         Calculate how much more revenue your firm can earn
@@ -149,7 +149,7 @@ const PricingCalculator = () => {
         </div>
 
         {/* Right Container: RESULTS */}
-        <div className="bg-white w-full py-8 px-6 shadow-md rounded-2xl flex flex-col items-center gap-5">
+        <div className="bg-white w-full py-8 px-2 sm:px-6 shadow-md rounded-2xl flex flex-col items-center gap-5">
           <h6 className="text-center font-display font-bold text-xl">
             Estimated monthly revenue increase*
           </h6>
@@ -180,7 +180,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Incremental Pools Added Because of Time Savings
                 </p>
               </div>
@@ -200,7 +200,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Avg Monthly Revenue
                 </p>
               </div>
@@ -222,7 +222,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Cost of Skimmer
                 </p>
               </div>
@@ -242,7 +242,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Cost as a % of Revenue
                 </p>
               </div>
@@ -262,7 +262,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Monthly Revenue with Skimmer
                 </p>
               </div>
@@ -284,7 +284,7 @@ const PricingCalculator = () => {
                   src={questionIcon}
                   alt="question-icon"
                 />
-                <p className="font-body text-skimmer-text-dark text-lg">
+                <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Return on Investment
                 </p>
               </div>
