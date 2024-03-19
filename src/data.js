@@ -22,7 +22,7 @@ export const getCostAsAPercentageOfRevenue = (
   costOfSkimmer,
   avgMonthlyRevenue
 ) => {
-  return Number(costOfSkimmer / avgMonthlyRevenue).toPrecision(2);
+  return Number(Number(costOfSkimmer / avgMonthlyRevenue) * 100).toFixed(2);
 };
 export const getMonthlyRevenueWithSkimmer = (
   avgNumberOfPools,
