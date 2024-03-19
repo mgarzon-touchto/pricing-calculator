@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import questionIcon from "../dist/assets/circle-question.png";
 
 import {
@@ -6,6 +7,7 @@ import {
   makeCalculations,
   GETTING_STARTED,
   SCALING_UP,
+  OWN_THE_MARKET,
   CONTACT_US_URL,
 } from "./data";
 
@@ -17,7 +19,7 @@ const PricingCalculator = () => {
     avgInvoiceMonth: defaultValues.inputs.avgInvoiceMonth,
   });
   const [results, setResults] = useState(defaultValues.results);
-  const [isOTMSelected, setIsOTMSelected] = useState(false);
+  const [planSelected, setPlanSelected] = useState(1);
 
   const handleChange = (event) => {
     setInputData({
@@ -27,7 +29,7 @@ const PricingCalculator = () => {
   };
 
   const handleSubmit = (planSelected) => {
-    setIsOTMSelected(false);
+    setPlanSelected(planSelected);
     const results = makeCalculations(
       planSelected,
       inputData.avgNumberOfPools,
@@ -128,20 +130,35 @@ const PricingCalculator = () => {
 
           <div className="w-full flex flex-row gap-px md:gap-2.5 items-center justify-around md:justify-start">
             <button
-              className="py-2.5 px-6 rounded-md font-display text-skimmer-text-light bg-skimmer-light-600 hover:bg-skimmer-light-700"
+              className={classNames(
+                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-skimmer-light-700",
+                planSelected === GETTING_STARTED
+                  ? "bg-skimmer-light-600 ring-4 ring-skimmer-light-200"
+                  : "bg-skimmer-light-600/70"
+              )}
               onClick={() => handleSubmit(GETTING_STARTED)}
             >
               Getting Started
             </button>
             <button
-              className="py-2.5 px-6 rounded-md font-display text-skimmer-text-light bg-orchid-600 hover:bg-orchid-700"
+              className={classNames(
+                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-orchid-700",
+                planSelected === SCALING_UP
+                  ? "bg-orchid-600 ring-4 ring-skimmer-light-200"
+                  : "bg-orchid-600/70"
+              )}
               onClick={() => handleSubmit(SCALING_UP)}
             >
               Scaling Up
             </button>
             <button
-              className="py-2.5 px-6 rounded-md font-display text-skimmer-text-light bg-navy-600 hover:bg-navy-700"
-              onClick={() => setIsOTMSelected(true)}
+              className={classNames(
+                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-navy-700",
+                planSelected === OWN_THE_MARKET
+                  ? "bg-navy-600 ring-4 ring-skimmer-light-200"
+                  : "bg-navy-600/70"
+              )}
+              onClick={() => setPlanSelected(OWN_THE_MARKET)}
             >
               Own the Market
             </button>
@@ -155,15 +172,15 @@ const PricingCalculator = () => {
           </h6>
 
           <p className="text-center font-display font-extrabold text-5xl text-skimmer-light-600">
-            {isOTMSelected
+            {planSelected === OWN_THE_MARKET
               ? "Contact Us"
               : `$${(results?.incrementalMonthlyRevenue || 0).toLocaleString(
                   "en-US"
                 )}`}
           </p>
 
-          {isOTMSelected && (
-            <a href={CONTACT_US_URL}>
+          {planSelected === OWN_THE_MARKET && (
+            <a href={CONTACT_US_URL} target="_blank">
               <button className="py-2.5 px-6 rounded-md font-display text-secondary bg-primary hover:bg-primary/75">
                 Contact Us
               </button>
@@ -185,7 +202,7 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected
+                {planSelected === OWN_THE_MARKET
                   ? "-"
                   : results?.incrementalPoolsAddedBecauseOfTimeSavings}
               </p>
@@ -205,7 +222,7 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected
+                {planSelected === OWN_THE_MARKET
                   ? "-"
                   : `$${(results?.avgMonthlyRevenue || 0).toLocaleString(
                       "en-US"
@@ -227,7 +244,7 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected
+                {planSelected === OWN_THE_MARKET
                   ? "-"
                   : `$${(results?.costOfSkimmer || 0).toLocaleString("en-US")}`}
               </p>
@@ -247,7 +264,7 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected
+                {planSelected === OWN_THE_MARKET
                   ? "-"
                   : `${results?.costAsAPercentageOfRevenue}%`}
               </p>
@@ -267,7 +284,7 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected
+                {planSelected === OWN_THE_MARKET
                   ? "-"
                   : `$${(
                       results?.monthlyRevenueWithSkimmer || 0
@@ -289,7 +306,9 @@ const PricingCalculator = () => {
                 </p>
               </div>
               <p className="font-body font-semibold text-skimmer-light-600 text-lg">
-                {isOTMSelected ? "-" : `${results?.returnOnInvestment}x`}
+                {planSelected === OWN_THE_MARKET
+                  ? "-"
+                  : `${results?.returnOnInvestment}x`}
               </p>
             </div>
           </div>
