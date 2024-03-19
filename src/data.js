@@ -10,19 +10,19 @@ export const CONTACT_US_URL = "https://getskimmer.com"
 
 // FORMULAS
 export const getIncrementalPoolsAddedBecauseOfTimeSavings = (numberOfTechs) => {
-  return HOURS_SAVED_WITH_SKIMMER * NUMBER_OF_POOLS_CLEANED_PER_HOUR * numberOfTechs;
+  return Number(HOURS_SAVED_WITH_SKIMMER * NUMBER_OF_POOLS_CLEANED_PER_HOUR * numberOfTechs);
 };
 export const getAvgMonthlyRevenue = (avgNumberOfPools, avgInvoiceMonth) => {
-  return avgNumberOfPools * avgInvoiceMonth;
+  return Number(avgNumberOfPools * avgInvoiceMonth);
 };
 export const getCostOfSkimmer = (planSelected, avgNumberOfPools) => {
-  return planSelected * avgNumberOfPools;
+  return Number(planSelected * avgNumberOfPools);
 };
 export const getCostAsAPercentageOfRevenue = (
   costOfSkimmer,
   avgMonthlyRevenue
 ) => {
-  return (costOfSkimmer / avgMonthlyRevenue).toPrecision(2);
+  return Number(costOfSkimmer / avgMonthlyRevenue).toPrecision(2);
 };
 export const getMonthlyRevenueWithSkimmer = (
   avgNumberOfPools,
@@ -30,7 +30,7 @@ export const getMonthlyRevenueWithSkimmer = (
   avgInvoiceMonth
 ) => {
   return (
-    (avgNumberOfPools + incrementalPoolsAddedBecauseOfTimeSavings) *
+    (Number(avgNumberOfPools) + Number(incrementalPoolsAddedBecauseOfTimeSavings)) *
     avgInvoiceMonth
   );
 };
@@ -38,13 +38,13 @@ export const getIncrementalMonthlyRevenue = (
   monthlyRevenueWithSkimmer,
   avgMonthlyRevenue
 ) => {
-  return monthlyRevenueWithSkimmer - avgMonthlyRevenue;
+  return Number(monthlyRevenueWithSkimmer) - Number(avgMonthlyRevenue);
 };
 export const getReturnOnInvestment = (
   incrementalMonthlyRevenue,
   costOfSkimmer
 ) => {
-  return incrementalMonthlyRevenue / costOfSkimmer;
+  return Number(incrementalMonthlyRevenue / costOfSkimmer).toPrecision(2);
 };
 
 // USE ALL THE FORMULAS AND RETURNS THE RESULT
