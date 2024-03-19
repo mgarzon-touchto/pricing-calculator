@@ -39,7 +39,7 @@ const PricingCalculator = () => {
   };
 
   return (
-    <div className="w-full p-6 gap-4 md:p-10 md:gap-8 lg:p-28 lg:gap-16 flex flex-col justify-center items-center bg-skimmer-light-100">
+    <div className="w-full min-h-screen overflow-y-auto p-6 gap-4 md:p-10 md:gap-8 lg:p-28 lg:gap-16 flex flex-col justify-center items-center bg-skimmer-light-100">
       {/* Heading */}
       <h1 className="text-4xl text-skimmer-text-dark font-display font-bold text-center">
         Calculate how much more revenue your firm can earn
