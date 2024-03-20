@@ -50,7 +50,7 @@ const PricingCalculator = () => {
       {/* Content */}
       <div className="w-full flex flex-col lg:flex-row items-start gap-5 lg:gap-10">
         {/* Left Container: INPUTS */}
-        <div className="w-full py-8 flex flex-col gap-8">
+        <div className="w-full py-4 sm:py-8 flex flex-col gap-8">
           <div className="w-full flex flex-col md:flex-row gap-2.5">
             <div className="basis-1/2 flex flex-col gap-2">
               <label
@@ -128,10 +128,10 @@ const PricingCalculator = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-row gap-px md:gap-2.5 items-center justify-around md:justify-start">
+          <div className="w-full flex flex-col sm:flex-row gap-2.5 items-center justify-center lg:justify-start">
             <button
               className={classNames(
-                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-skimmer-light-700",
+                "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-skimmer-light-700",
                 planSelected === GETTING_STARTED
                   ? "bg-skimmer-light-600 ring-4 ring-skimmer-light-200"
                   : "bg-skimmer-light-600/70"
@@ -142,7 +142,7 @@ const PricingCalculator = () => {
             </button>
             <button
               className={classNames(
-                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-orchid-700",
+                "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-orchid-700",
                 planSelected === SCALING_UP
                   ? "bg-orchid-600 ring-4 ring-skimmer-light-200"
                   : "bg-orchid-600/70"
@@ -153,7 +153,7 @@ const PricingCalculator = () => {
             </button>
             <button
               className={classNames(
-                "py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-navy-700",
+                "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-navy-700",
                 planSelected === OWN_THE_MARKET
                   ? "bg-navy-600 ring-4 ring-skimmer-light-200"
                   : "bg-navy-600/70"
@@ -166,7 +166,7 @@ const PricingCalculator = () => {
         </div>
 
         {/* Right Container: RESULTS */}
-        <div className="bg-white w-full py-8 px-2 sm:px-6 shadow-md rounded-2xl flex flex-col items-center gap-5">
+        <div className="bg-white w-full py-4 sm:py-8 px-2 sm:px-6 shadow-md rounded-2xl flex flex-col items-center gap-5">
           <h6 className="text-center font-display font-bold text-xl">
             Estimated monthly revenue increase*
           </h6>
