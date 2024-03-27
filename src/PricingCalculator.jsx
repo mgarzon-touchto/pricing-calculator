@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import questionIcon from "../dist/assets/circle-question.png";
 
 import {
   defaultValues,
@@ -19,7 +18,7 @@ const PricingCalculator = () => {
     avgInvoiceMonth: defaultValues.inputs.avgInvoiceMonth,
   });
   const [results, setResults] = useState(defaultValues.results);
-  const [planSelected, setPlanSelected] = useState(1);
+  const [planSelected, setPlanSelected] = useState(GETTING_STARTED);
 
   const handleChange = (event) => {
     setInputData({
@@ -28,8 +27,7 @@ const PricingCalculator = () => {
     });
   };
 
-  const handleSubmit = (planSelected) => {
-    setPlanSelected(planSelected);
+  useEffect(() => {
     const results = makeCalculations(
       planSelected,
       inputData.avgNumberOfPools,
@@ -38,7 +36,7 @@ const PricingCalculator = () => {
       inputData.avgInvoiceMonth
     );
     setResults(results);
-  };
+  }, [inputData, planSelected])
 
   return (
     <div className="w-full min-h-screen overflow-y-auto p-4 gap-4 md:p-10 md:gap-8 lg:p-28 lg:gap-16 flex flex-col justify-center items-center bg-skimmer-light-100">
@@ -134,9 +132,9 @@ const PricingCalculator = () => {
                 "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-skimmer-light-700",
                 planSelected === GETTING_STARTED
                   ? "bg-skimmer-light-600 ring-4 ring-skimmer-light-200"
-                  : "bg-skimmer-light-600/70"
+                  : "bg-skimmer-light-600/50"
               )}
-              onClick={() => handleSubmit(GETTING_STARTED)}
+              onClick={() => setPlanSelected(GETTING_STARTED)}
             >
               Getting Started
             </button>
@@ -145,9 +143,9 @@ const PricingCalculator = () => {
                 "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-orchid-700",
                 planSelected === SCALING_UP
                   ? "bg-orchid-600 ring-4 ring-skimmer-light-200"
-                  : "bg-orchid-600/70"
+                  : "bg-orchid-600/50"
               )}
-              onClick={() => handleSubmit(SCALING_UP)}
+              onClick={() => setPlanSelected(SCALING_UP)}
             >
               Scaling Up
             </button>
@@ -156,7 +154,7 @@ const PricingCalculator = () => {
                 "w-full sm:w-auto py-2.5 px-6 rounded-md font-display text-skimmer-text-light hover:bg-navy-700",
                 planSelected === OWN_THE_MARKET
                   ? "bg-navy-600 ring-4 ring-skimmer-light-200"
-                  : "bg-navy-600/70"
+                  : "bg-navy-600/50"
               )}
               onClick={() => setPlanSelected(OWN_THE_MARKET)}
             >
@@ -171,32 +169,24 @@ const PricingCalculator = () => {
             Estimated monthly revenue increase*
           </h6>
 
-          <p className="text-center font-display font-extrabold text-5xl text-skimmer-light-600">
-            {planSelected === OWN_THE_MARKET
-              ? "Contact Us"
-              : `$${(results?.incrementalMonthlyRevenue || 0).toLocaleString(
-                  "en-US"
-                )}`}
-          </p>
-
-          {planSelected === OWN_THE_MARKET && (
-            <a href={CONTACT_US_URL} target="_blank">
+          {planSelected === OWN_THE_MARKET ? (
+            <a href={CONTACT_US_URL} target="_blank" className="my-0.5">
               <button className="py-2.5 px-6 rounded-md font-display text-secondary bg-primary hover:bg-primary/75">
                 Contact Us
               </button>
             </a>
+          ) : (
+            <p className="text-center font-display font-extrabold text-5xl text-skimmer-light-600">
+              {`$${(results?.incrementalMonthlyRevenue || 0).toLocaleString(
+                "en-US"
+              )}`}
+            </p>
           )}
 
           <div className="w-full flex flex-col gap-4">
             {/* Incremental Pools Added Because of Time Savings */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Incremental Pools Added Because of Time Savings
                 </p>
@@ -211,12 +201,6 @@ const PricingCalculator = () => {
             {/* Avg Monthly Revenue */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Avg Monthly Revenue
                 </p>
@@ -233,12 +217,6 @@ const PricingCalculator = () => {
             {/* Cost of Skimmer */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Cost of Skimmer
                 </p>
@@ -253,12 +231,6 @@ const PricingCalculator = () => {
             {/* Cost as a % of Revenue */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Cost as a % of Revenue
                 </p>
@@ -273,12 +245,6 @@ const PricingCalculator = () => {
             {/* Monthly Revenue with Skimmer */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Monthly Revenue with Skimmer
                 </p>
@@ -295,12 +261,6 @@ const PricingCalculator = () => {
             {/* Return on Investment */}
             <div className="w-full flex flex-row justify-between items-center">
               <div className="w-full flex flex-row items-center gap-2">
-                <img
-                  width={24}
-                  height={24}
-                  src={questionIcon}
-                  alt="question-icon"
-                />
                 <p className="font-body text-skimmer-text-dark sm:text-lg">
                   Return on Investment
                 </p>

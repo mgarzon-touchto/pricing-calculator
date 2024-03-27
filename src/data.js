@@ -1,16 +1,27 @@
 // CONSTANTS
-export const GETTING_STARTED = 1; // $ PER POOL LOCATION SERVICED
-export const SCALING_UP = 2; // $ PER POOL LOCATION SERVICED
-export const OWN_THE_MARKET = 3; // $ PER POOL LOCATION SERVICED
+export const GETTING_STARTED = 1; // $ per pool location serviced
+export const SCALING_UP = 2; // $ per pool location serviced
+export const OWN_THE_MARKET = 3; // $ per pool location serviced
 
 export const HOURS_SAVED_WITH_SKIMMER = 5;
-export const NUMBER_OF_POOLS_CLEANED_PER_HOUR = 2
+export const GS_NUMBER_OF_POOLS = 1; // # of pools cleaned per hour for GETTING STARTED plan
+export const SU_NUMBER_OF_POOLS = 2; // # of pools cleaned per hour for SCALING UP plan
 
-export const CONTACT_US_URL = "https://skimmer-inc.webflow.io/utility/contact-us"
+export const CONTACT_US_URL =
+  "https://skimmer-inc.webflow.io/utility/contact-us";
 
 // FORMULAS
-export const getIncrementalPoolsAddedBecauseOfTimeSavings = (numberOfTechs) => {
-  return Number(HOURS_SAVED_WITH_SKIMMER * NUMBER_OF_POOLS_CLEANED_PER_HOUR * numberOfTechs);
+export const getIncrementalPoolsAddedBecauseOfTimeSavings = (
+  numberOfTechs,
+  planSelected
+) => {
+  return Number(
+    numberOfTechs *
+      HOURS_SAVED_WITH_SKIMMER *
+      (planSelected === GETTING_STARTED
+        ? GS_NUMBER_OF_POOLS
+        : SU_NUMBER_OF_POOLS)
+  );
 };
 export const getAvgMonthlyRevenue = (avgNumberOfPools, avgInvoiceMonth) => {
   return Number(avgNumberOfPools * avgInvoiceMonth);
@@ -30,7 +41,8 @@ export const getMonthlyRevenueWithSkimmer = (
   avgInvoiceMonth
 ) => {
   return (
-    (Number(avgNumberOfPools) + Number(incrementalPoolsAddedBecauseOfTimeSavings)) *
+    (Number(avgNumberOfPools) +
+      Number(incrementalPoolsAddedBecauseOfTimeSavings)) *
     avgInvoiceMonth
   );
 };
@@ -57,7 +69,10 @@ export const makeCalculations = (
 ) => {
   const incrementalPoolsAddedBecauseOfTimeSavings =
     getIncrementalPoolsAddedBecauseOfTimeSavings(numberOfTechs);
-  const avgMonthlyRevenue = getAvgMonthlyRevenue(avgNumberOfPools, avgInvoiceMonth);
+  const avgMonthlyRevenue = getAvgMonthlyRevenue(
+    avgNumberOfPools,
+    avgInvoiceMonth
+  );
   const costOfSkimmer = getCostOfSkimmer(planSelected, avgNumberOfPools);
   const costAsAPercentageOfRevenue = getCostAsAPercentageOfRevenue(
     costOfSkimmer,
